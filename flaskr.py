@@ -3,15 +3,9 @@ import sqlite3
 from flask import Flask,session,abort,request,g,redirect,url_for,render_template,flash
 from contextlib import closing
 
-# configuration
-DATABASE = 'flaskr.db'
-BEBUG = True
-SECRET_KEY = 'OAIe+mwFSBOYhoDnOAtmHguaATYzB0jRraznGKGBCEI='
-USERNAME = 'admin'
-PASSWORD = 'admin'
-
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.config.from_pyfile('settings.py')
 
 # connect database
 def connect_db():
