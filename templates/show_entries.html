@@ -13,7 +13,19 @@
   {% endif %}
   <ul class=entries>
   {% for entry in entries %}
-    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
+      <table>
+          <tr>
+              <td>
+                  <h2>{{ entry.title }}</h2>
+                  {{ entry.text|safe }}
+                      <form method="post" action="{{ url_for('del_entries') }}">
+                          <button type="submit" name="delete" value="{{ entry.title }}">删除</button>
+                      </form>
+
+              </td>
+          </tr>
+      </table>
+
   {% else %}
     <li><em>Unbelievable.  No entries here so far</em>
   {% endfor %}

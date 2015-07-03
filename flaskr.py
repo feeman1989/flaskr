@@ -61,5 +61,13 @@ def add_entries():
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
 
+@app.route('/del',methods=['POST'])
+def del_entries():
+    if not session.get('logged_in'):
+        abort(401)
+    g.db.execute('delete from entries where  title="%s"' % request.form['delete'])
+    g.db.commit()
+    flash('Delete entry was successfully!')
+    return redirect(url_for('show_entries'))
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=80,debug=True)
