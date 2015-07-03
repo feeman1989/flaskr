@@ -64,7 +64,8 @@ def add_entries():
 @app.route('/del',methods=['POST'])
 def del_entries():
     if not session.get('logged_in'):
-        abort(401)
+        flash('Please login first!')
+        return redirect(url_for('login'))
     g.db.execute('delete from entries where  title="%s"' % request.form['delete'])
     g.db.commit()
     flash('Delete entry was successfully!')
